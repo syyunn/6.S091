@@ -1,0 +1,39 @@
+\documentclass[10pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+\newenvironment{problem}[2][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\begin{document}
+ 
+\title{Problem Set Template}
+\author{Your name\\
+Course number: Course name}
+\maketitle
+ 
+\begin{problem}{1.1}
+Delete this text and write theorem statement here.
+\end{problem}
+
+\begin{proof}[Solution]
+Write a solution here
+\begin{align*}
+x &= y
+\end{align*}
+\begin{tabular}{| >{\centering\arraybackslash}m{1in} | >{\centering\arraybackslash}m{1in} | >{\centering\arraybackslash}m{1in} | >{\centering\arraybackslash}m{1in} |>{\centering\arraybackslash}m{1in} |}
+\hline 
+  \textbf{A} & \textbf{B} & \textbf{C} & \textbf{D} &\textbf{E} \\[8pt]
+  \hline
+  a & b & c & d & e \\[8pt]
+  \hline
+  f & g &h & i & j \\[8pt]
+  \hline
+\end{tabular}
+\end{proof}
+
+\end{document}
