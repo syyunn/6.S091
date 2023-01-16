@@ -25,108 +25,139 @@
 \maketitle
  
 \section{Preliminaries}
-\textbf{(a)} 
+\subsection{(a)} 
 \begin{align*}
 \mathbb{P}_{\mathcal{X}} &= P(U)P(A|U)P(M|A)P(Y|M, U) \\
 &= \operatorname{Ber}(0.5) \operatorname{Ber}(U/4) \operatorname{Ber}(0.5 + 0.1A)\operatorname{Ber}(M/2 + U/4)
 \end{align*}
 
-\textbf{(b)} 
-
+\subsection{(b)} 
 \begin{align*}
-    P(Y|M=0, A=0) &= \mathbbm{1}_{\left\{\varepsilon_y+U / 4 \geq 1\right\}} \sim \operatorname{Ber}(U/4)\\
-    P(Y=1|M=0, A=0) &= P(Y=1|M=0, A=0, U=0)P(U=0) \\ &+ P(Y=1|M=0, A=0, U=1)P(U=1)\\
-    &= 0 \cdot 1/2 + 1/4 \cdot 1/2\\
-    &= 1/8\\
-    P(Y=1|M=0, A=1) &= P(Y=1|M=0, A=0)\\
-    &= 1/8
+&\mathbb{P}_{\mathcal{X}}(Y=1) = 0.38125\\
+&\mathbb{P}_{\mathcal{X}}(Y=1 \mid M=0, A=0)= 0.046875\\
+&\mathbb{P}_{\mathcal{X}}(Y=1 \mid M=0, A=1)= 0.0125\\
 \end{align*}
 
 
-% Since $U, A, M, Y$ are all have a set of alphabets $\{0, 1\}$, they follows Bernoulli distribution.
-% Then remaining task is to find the parameter of Bernoulli distribution for each variable.
-\begin{align*}
-\end{align*}
+% \begin{align*}
+%     P(Y|M=0, A=0) &= \mathbbm{1}_{\left\{\varepsilon_y+U / 4 \geq 1\right\}} \sim \operatorname{Ber}(U/4)\\
+%     P(Y=1|M=0, A=0) &= P(Y=1|M=0, A=0, U=0)P(U=0) \\ &+ P(Y=1|M=0, A=0, U=1)P(U=1)\\
+%     &= 0 \cdot 1/2 + 1/4 \cdot 1/2\\
+%     &= 1/8\\
+%     P(Y=1|M=0, A=1) &= P(Y=1|M=0, A=0)\\
+%     &= 1/8
+% \end{align*}
 
 
-\begin{align*}
-    \mathbb{P}(A=1) &=\sum_{U \in \{0,1\}}\mathbb{P}(A=1|U)P(U) && (\text{Law of Total Probability})\\
-    &=\sum_{U \in \{0,1\}}\mathbb{P}(\epsilon_a+U/4\ge1)P(U) \\
-    &=\sum_{U \in \{0,1\}}\mathbb{P}(\epsilon_a\ge1-U/4)P(U) \\
-    &=\mathbb{P}(\epsilon_a\ge 3/4)P(U=1) + \mathbb{P}(\epsilon_a\ge 1)P(U=0) \\
-    &=1/4\cdot1/2 + 0\cdot 1/2\\
-    &=1/8
-\end{align*}
+% % Since $U, A, M, Y$ are all have a set of alphabets $\{0, 1\}$, they follows Bernoulli distribution.
+% % Then remaining task is to find the parameter of Bernoulli distribution for each variable.
+% \begin{align*}
+% \end{align*}
 
-\begin{align*}
-    \mathbb{P}(M=1) &=\sum_{A \in \{0,1\}}\mathbb{P}(M=1|A)P(A) && (\text{Law of Total Probability})\\
-    &=\sum_{A \in \{0,1\}}\mathbb{P}(\varepsilon_m+10(1-A) \leq 60)P(A) \\
-    &=\sum_{A \in \{0,1\}}\mathbb{P}(\varepsilon_m \leq 60-10(1-A))P(A) \\
-    &=\mathbb{P}(\varepsilon_m \leq 60)P(A=1) + \mathbb{P}(\varepsilon_m \leq 50)P(A=0) \\
-    &=3/5\cdot1/8 + 1/2\cdot7/8\\
-    &=41/80
-\end{align*}
 
-\begin{align*}
-    \mathbb{P}(Y=1) &=\sum_{M \times U \in \{0,1\} \times \{0,1 \}} \mathbb{P}(Y=1|M, U)P(M, U) && (\text{Law of Total Probability})\\
-    &=\sum_{M \times U \in \{0,1\} \times \{0,1 \}} \mathbb{P}(Y=1|M, U)P(M|U)P(U)\\
-    &=\sum_{M \in \{0,1\}} \mathbb{P}(Y=1|M, U=0)P(M|U=0)P(U=0) \\ &+ \sum_{M \in \{0,1\}} \mathbb{P}(Y=1|M, U=1)P(M|U=1)P(U=1)\\
-    &=\mathbb{P}(Y=1|M=0, U=0)P(M=0|U=0)\cdot 1/2 \\& + \mathbb{P}(Y=1|M=1, U=0)P(M=1|U=0)\cdot 1/2 \\ &+ \mathbb{P}(Y=1|M=0, U=1)P(M=0|U=1)\cdot 1/2 \\ &+\mathbb{P}(Y=1|M=1, U=1)P(M=1|U=1)\cdot 1/2\\
-    &=0\cdot 41/80 \cdot 1/2 \\
-    & + 1/2 \cdot 39/80 \cdot 1/2 \\ 
-    &+ 1/4 \cdot 39/80 \cdot 1/2 \\ 
-    &+ 3/4 \cdot 41/80 \cdot 1/2\\
-    &=3/8
-\end{align*}
+% \begin{align*}
+%     \mathbb{P}(A=1) &=\sum_{U \in \{0,1\}}\mathbb{P}(A=1|U)P(U) && (\text{Law of Total Probability})\\
+%     &=\sum_{U \in \{0,1\}}\mathbb{P}(\epsilon_a+U/4\ge1)P(U) \\
+%     &=\sum_{U \in \{0,1\}}\mathbb{P}(\epsilon_a\ge1-U/4)P(U) \\
+%     &=\mathbb{P}(\epsilon_a\ge 3/4)P(U=1) + \mathbb{P}(\epsilon_a\ge 1)P(U=0) \\
+%     &=1/4\cdot1/2 + 0\cdot 1/2\\
+%     &=1/8
+% \end{align*}
 
-In the above calculation, it's worth noting that $U$ nad $M$ are correlated via $A$, i.e. $U \rightarrow A \rightarrow M$. $M$ and $U$ are not independent and thus, $P(M|U)$ is computed as follows.
+% \begin{align*}
+%     \mathbb{P}(M=1) &=\sum_{A \in \{0,1\}}\mathbb{P}(M=1|A)P(A) && (\text{Law of Total Probability})\\
+%     &=\sum_{A \in \{0,1\}}\mathbb{P}(\varepsilon_m+10(1-A) \leq 60)P(A) \\
+%     &=\sum_{A \in \{0,1\}}\mathbb{P}(\varepsilon_m \leq 60-10(1-A))P(A) \\
+%     &=\mathbb{P}(\varepsilon_m \leq 60)P(A=1) + \mathbb{P}(\varepsilon_m \leq 50)P(A=0) \\
+%     &=3/5\cdot1/8 + 1/2\cdot7/8\\
+%     &=41/80
+% \end{align*}
 
-\begin{align*}
-    P(M=0|U=0) &=  P(M=0|U=0, A=0)P(A=0) + P(M=0|U=0, A=1)P(A=1) \\
-    &=1/2 \cdot 7/8 + 3/5 \cdot 1/8 \\
-    &=41/80\\
-P(M=1|U=0) &= 1- 41/80 = 39/80 && \\
-P(M=0|U=1) &=  P(M=0|U=1, A=0)P(A=0) + P(M=0|U=1, A=1)P(A=1) \\
-&=1/2 \cdot 7/8 + 2/5 \cdot 1/8 \\
-&=39/80\\
-P(M=1|U=1) &=  41/80 \\
-\end{align*}
+% \begin{align*}
+%     \mathbb{P}(Y=1) &=\sum_{M \times U \in \{0,1\} \times \{0,1 \}} \mathbb{P}(Y=1|M, U)P(M, U) && (\text{Law of Total Probability})\\
+%     &=\sum_{M \times U \in \{0,1\} \times \{0,1 \}} \mathbb{P}(Y=1|M, U)P(M|U)P(U)\\
+%     &=\sum_{M \in \{0,1\}} \mathbb{P}(Y=1|M, U=0)P(M|U=0)P(U=0) \\ &+ \sum_{M \in \{0,1\}} \mathbb{P}(Y=1|M, U=1)P(M|U=1)P(U=1)\\
+%     &=\mathbb{P}(Y=1|M=0, U=0)P(M=0|U=0)\cdot 1/2 \\& + \mathbb{P}(Y=1|M=1, U=0)P(M=1|U=0)\cdot 1/2 \\ &+ \mathbb{P}(Y=1|M=0, U=1)P(M=0|U=1)\cdot 1/2 \\ &+\mathbb{P}(Y=1|M=1, U=1)P(M=1|U=1)\cdot 1/2\\
+%     &=0\cdot 41/80 \cdot 1/2 \\
+%     & + 1/2 \cdot 39/80 \cdot 1/2 \\ 
+%     &+ 1/4 \cdot 39/80 \cdot 1/2 \\ 
+%     &+ 3/4 \cdot 41/80 \cdot 1/2\\
+%     &=3/8
+% \end{align*}
+
+% In the above calculation, it's worth noting that $U$ nad $M$ are correlated via $A$, i.e. $U \rightarrow A \rightarrow M$. $M$ and $U$ are not independent and thus, $P(M|U)$ is computed as follows.
+
+% \begin{align*}
+%     P(M=0|U=0) &=  P(M=0, A=0|U=0)P(A=0|U=0) + P(M=0, A=1|U=0)P(A=1|U=0) \\
+%     &=1/2 \cdot 7/8 + 3/5 \cdot 1/8 \\
+%     &=41/80\\
+% P(M=1|U=0) &= 1- 41/80 = 39/80 && \\
+% P(M=0|U=1) &=  P(M=0|U=1, A=0)P(A=0) + P(M=0|U=1, A=1)P(A=1) \\
+% &=1/2 \cdot 7/8 + 2/5 \cdot 1/8 \\
+% &=39/80\\
+% P(M=1|U=1) &=  41/80 \\
+% \end{align*}
+
+% \begin{align*}
+%     P(M=0|U=0) &=  P(M=0|U=0, A=0)P(A=0) + P(M=0|U=0, A=1)P(A=1) \\
+%     &=1/2 \cdot 7/8 + 3/5 \cdot 1/8 \\
+%     &=41/80\\
+% P(M=1|U=0) &= 1- 41/80 = 39/80 && \\
+% P(M=0|U=1) &=  P(M=0|U=1, A=0)P(A=0) + P(M=0|U=1, A=1)P(A=1) \\
+% &=1/2 \cdot 7/8 + 2/5 \cdot 1/8 \\
+% &=39/80\\
+% P(M=1|U=1) &=  41/80 \\
+% \end{align*}
 
 \section{Interventional}
 \subsection{(c)}
 
 \begin{align*}
-\mathbb{P}_{\mathcal{X}}(U, A, M, Y \mid \operatorname{do}(A=1)) &=  P(U)P(A^I=1)P(M|A=1)P(Y|M, U)\\
+\mathbb{P}_{\mathcal{X}}(U, A, M, Y \mid \operatorname{do}(A=1)) &=  P(U)P(A=1)P(M|A=1)P(Y|M, U)\\
 &= \operatorname{Ber}(0.5)\cdot1\cdot\operatorname{Ber}(0.6)\cdot\operatorname{Ber}(M/2 + U/4)\\
 &= \operatorname{Ber}(0.5)\cdot\operatorname{Ber}(0.6)\cdot\operatorname{Ber}(M/2 + U/4)
 \end{align*}    
 
 \subsection{(d)}
-\begin{align*}
-    \mathbb{P}_{\mathcal{X}}(Y=1 \mid \text { do }(A=1))  &=\sum_{M \times U \in \{0,1\} \times \{0,1 \}} \mathbb{P}(Y=1|\text { do }(A=1), M, U)P(M, U|\text { do }(A=1)) \\
-    &=\sum_{M \times U \in \{0,1\} \times \{0,1 \}} \mathbb{P}(Y=1|\text { do }(A=1), M, U)P(M|\text { do }(A=1))P(U|\text { do }(A=1))\\
-    &=\mathbb{P}(Y=1|\text { do }(A=1), M=0, U=0)P(M=0|\text { do }(A=1))P(M|\text { do }(A=1))P(U=0|\text { do }(A=1))
-    \\& + \mathbb{P}(Y=1|\text { do }(A=1), M=1, U=0)P(M=1|\text { do }(A=1))P(M|\text { do }(A=1))P(U=0|\text { do }(A=1)) 
-    \\&+ \mathbb{P}(Y=1|\text { do }(A=1), M=0, U=1)P(M=0|\text { do }(A=1))P(M|\text { do }(A=1))P(U=1|\text { do }(A=1))
-    \\&+\mathbb{P}(Y=1|\text { do }(A=1), M=1, U=1)P(M=1|\text { do }(A=1))P(M|\text { do }(A=1))P(U=1|\text { do }(A=1))\\
-    &=0\cdot 2/5\cdot 0 + 1/2 \cdot 3/5\cdot 0  + 1/4 \cdot 2/5\cdot 1 + 0.75 \cdot 3/5\cdot 1\\
-    &=11/20\\
-    &=0.55\\
-    \mathbb{P}_{\mathcal{X}}(Y=0 \mid \text { do }(A=1)) &= 1-0.55 = 0.45
-\end{align*}
+% \begin{align*}
+%     \mathbb{P}_{\mathcal{X}}(Y=1 \mid \text { do }(A=1))  &=\sum_{M \times U \in \{0,1\} \times \{0,1 \}} \mathbb{P}(Y=1|\text { do }(A=1), M, U)P(M, U|\text { do }(A=1)) \\
+%     &=\sum_{M \times U \in \{0,1\} \times \{0,1 \}} \mathbb{P}(Y=1|\text { do }(A=1), M, U)P(M|\text { do }(A=1))P(U|\text { do }(A=1))\\
+%     &=\mathbb{P}(Y=1|\text { do }(A=1), M=0, U=0)P(M=0|\text { do }(A=1))P(M|\text { do }(A=1))P(U=0|\text { do }(A=1))
+%     \\& + \mathbb{P}(Y=1|\text { do }(A=1), M=1, U=0)P(M=1|\text { do }(A=1))P(M|\text { do }(A=1))P(U=0|\text { do }(A=1)) 
+%     \\&+ \mathbb{P}(Y=1|\text { do }(A=1), M=0, U=1)P(M=0|\text { do }(A=1))P(M|\text { do }(A=1))P(U=1|\text { do }(A=1))
+%     \\&+\mathbb{P}(Y=1|\text { do }(A=1), M=1, U=1)P(M=1|\text { do }(A=1))P(M|\text { do }(A=1))P(U=1|\text { do }(A=1))\\
+%     &=0\cdot 2/5\cdot 0 + 1/2 \cdot 3/5\cdot 0  + 1/4 \cdot 2/5\cdot 1 + 0.75 \cdot 3/5\cdot 1\\
+%     &=11/20\\
+%     &=0.55\\
+%     \mathbb{P}_{\mathcal{X}}(Y=0 \mid \text { do }(A=1)) &= 1-0.55 = 0.45
+% \end{align*}
 
-\begin{align*}
-    \mathbb{P}_{\mathcal{X}}(Y=1 \mid \text { do }(A=0))  &=\sum_{M \times U \in \{0,1\} \times \{0,1 \}} \mathbb{P}(Y=1|\text { do }(A=0), M, U)P(M, U|\text { do }(A=0)) \\
-    &=\sum_{M \times U \in \{0,1\} \times \{0,1 \}} \mathbb{P}(Y=1|\text { do }(A=0), M, U)P(M|\text { do }(A=0))P(U|\text { do }(A=0))\\
-    &=\mathbb{P}(Y=1|\text { do }(A=0), M=0, U=0)P(M=0|\text { do }(A=0))\cdot P(U=0|\text { do }(A=0)) 
-    \\& + \mathbb{P}(Y=1|\text { do }(A=0), M=1, U=0)P(M=1|\text { do }(A=0))\cdot P(U=0|\text { do }(A=0)) 
-    \\&+ \mathbb{P}(Y=1|\text { do }(A=0), M=0, U=1)P(M=0|\text { do }(A=0))\cdot P(U=1|\text { do }(A=0)) 
-    \\&+\mathbb{P}(Y=1|\text { do }(A=0), M=1, U=1)P(M=1|\text { do }(A=0))\cdot P(U=1|\text { do }(A=0))\\
-    &=0\cdot 1/2\cdot 4/7 + 1/2 \cdot 1/2\cdot 4/7  + 1/4 \cdot 1/2\cdot 3/7 + 0.75 \cdot 1/2\cdot 3/7\\
-    &=5/14\\
-    \mathbb{P}_{\mathcal{X}}(Y=0 \mid \text { do }(A=0)) &= 1- 5/14 = 9/14
-\end{align*}
+% \begin{align*}
+%     \mathbb{P}_{\mathcal{X}}(Y=1 \mid \text { do }(A=0))  &=\sum_{M \times U \in \{0,1\} \times \{0,1 \}} \mathbb{P}(Y=1|\text { do }(A=0), M, U)P(M, U|\text { do }(A=0)) \\
+%     &=\sum_{M \times U \in \{0,1\} \times \{0,1 \}} \mathbb{P}(Y=1|\text { do }(A=0), M, U)P(M|\text { do }(A=0))P(U|\text { do }(A=0))\\
+%     &=\mathbb{P}(Y=1|\text { do }(A=0), M=0, U=0)P(M=0|\text { do }(A=0))\cdot P(U=0|\text { do }(A=0)) 
+%     \\& + \mathbb{P}(Y=1|\text { do }(A=0), M=1, U=0)P(M=1|\text { do }(A=0))\cdot P(U=0|\text { do }(A=0)) 
+%     \\&+ \mathbb{P}(Y=1|\text { do }(A=0), M=0, U=1)P(M=0|\text { do }(A=0))\cdot P(U=1|\text { do }(A=0)) 
+%     \\&+\mathbb{P}(Y=1|\text { do }(A=0), M=1, U=1)P(M=1|\text { do }(A=0))\cdot P(U=1|\text { do }(A=0))\\
+%     &=0\cdot 1/2\cdot 4/7 + 1/2 \cdot 1/2\cdot 4/7  + 1/4 \cdot 1/2\cdot 3/7 + 0.75 \cdot 1/2\cdot 3/7\\
+%     &=5/14\\
+%     \mathbb{P}_{\mathcal{X}}(Y=0 \mid \text { do }(A=0)) &= 1- 5/14 = 9/14
+% \end{align*}
+\begin{equation}
+    \mathbb{P}_{\mathcal{X}}(Y \mid \operatorname{do}(A=1))=
+    \begin{cases}
+        0.93125 & \text{if $Y=1$} \\
+        0.06875 & \text{if $Y=0$}
+    \end{cases}
+  \end{equation}
 
+  \begin{equation}
+    \mathbb{P}_{\mathcal{X}}(Y \mid \operatorname{do}(A=0))=
+    \begin{cases}
+        0.3125 & \text{if $Y=1$} \\
+        0.6875 & \text{if $Y=0$}
+    \end{cases}
+  \end{equation}
 
 
 \end{document}
