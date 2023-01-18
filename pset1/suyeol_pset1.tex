@@ -2,7 +2,7 @@
 \usepackage[fontsize=10pt]{fontsize}
 
 \usepackage[margin=0.5in]{geometry} 
-\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array}
+\usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array, txfonts}
 \usepackage{bbm}
 
 \newcommand{\N}{\mathbb{N}}
@@ -34,8 +34,8 @@
 \subsection{(b)} 
 \begin{align*}
 &\mathbb{P}_{\mathcal{X}}(Y=1) = 0.38125\\
-&\mathbb{P}_{\mathcal{X}}(Y=1 \mid M=0, A=0)= 0.046875\\
-&\mathbb{P}_{\mathcal{X}}(Y=1 \mid M=0, A=1)= 0.0125\\
+&\mathbb{P}_{\mathcal{X}}(Y=1 \mid M=0, A=0)= 0.10714285714285714\\
+&\mathbb{P}_{\mathcal{X}}(Y=1 \mid M=0, A=1)= 0.25\\
 \end{align*}
 
 
@@ -113,10 +113,17 @@
 \subsection{(c)}
 
 \begin{align*}
-\mathbb{P}_{\mathcal{X}}(U, A, M, Y \mid \operatorname{do}(A=1)) &=  P(U)P(A=1)P(M|A=1)P(Y|M, U)\\
-&= \operatorname{Ber}(0.5)\cdot1\cdot\operatorname{Ber}(0.6)\cdot\operatorname{Ber}(M/2 + U/4)\\
+\mathbb{P}_{\mathcal{X}}(U, A^I=1, M, Y \mid \operatorname{do}(A=1)) &=  P(U)P(M|A=1)P(Y|M, U, A=1)\\
+&= \operatorname{Ber}(0.5)\cdot\operatorname{Ber}(0.6)\cdot\operatorname{Ber}(M/2 + U/4)\\
 &= \operatorname{Ber}(0.5)\cdot\operatorname{Ber}(0.6)\cdot\operatorname{Ber}(M/2 + U/4)
 \end{align*}    
+
+\begin{align*}
+    \mathbb{P}_{\mathcal{X}}(U, A^I=1, M, Y \mid \operatorname{do}(A=0)) &=  P(U)P(M|A=0)P(Y|M, U, A=0)\\
+    &= \operatorname{Ber}(0.5)\cdot\operatorname{Ber}(0.5)\cdot\operatorname{Ber}(M/2 + U/4)\\
+    &= \operatorname{Ber}(0.5)\cdot\operatorname{Ber}(0.5)\cdot\operatorname{Ber}(M/2 + U/4)
+    \end{align*}    
+    
 
 \subsection{(d)}
 % \begin{align*}
@@ -146,18 +153,77 @@
 \begin{equation}
     \mathbb{P}_{\mathcal{X}}(Y \mid \operatorname{do}(A=1))=
     \begin{cases}
-        0.93125 & \text{if $Y=1$} \\
-        0.06875 & \text{if $Y=0$}
+        0.425 & \text{if $Y=1$} \\
+        0.575 & \text{if $Y=0$}
     \end{cases}
   \end{equation}
 
   \begin{equation}
     \mathbb{P}_{\mathcal{X}}(Y \mid \operatorname{do}(A=0))=
     \begin{cases}
-        0.3125 & \text{if $Y=1$} \\
-        0.6875 & \text{if $Y=0$}
+        0.375 & \text{if $Y=1$} \\
+        0.625 & \text{if $Y=0$}
     \end{cases}
   \end{equation}
 
+\subsection{(e)}
+If $A=1, U=0$, $P(A=1, U=0)=0$.  Therefore, $P(Y|A=1, U=0)$ is undefined. So I check only for the case of $do(A=0)$ which doesn't involve $P(Y|A=1, U=0)$ as a component in its process of computation. \\
+\begin{align*}
+    \mathbb{P}_{\mathcal{X}}(Y=1 \mid \operatorname{do}(A=0))&=0.375\\
+    \sum_{u \in\{0,1\}} \mathbb{P}_{\mathcal{X}}(Y=1 \mid A=0, U=u) \mathbb{P}_{\mathcal{X}}(U=u)&=\mathbb{P}_{\mathcal{X}}(Y=1 \mid A=0, U=1) \mathbb{P}_{\mathcal{X}}(U=1) + \mathbb{P}_{\mathcal{X}}(Y=1 \mid A=0, U=0) \mathbb{P}_{\mathcal{X}}(U=0)\\
+    &= 0.5 * 1/2 + 0.25 * 1/2\\
+    &= 0.375 \text{\quad (match)}
+\end{align*}
+
+\begin{align*}
+    \mathbb{P}_{\mathcal{X}}(Y=0 \mid \operatorname{do}(A=0))&=0.625\\
+    \sum_{u \in\{0,1\}} \mathbb{P}_{\mathcal{X}}(Y=0 \mid A=0, U=u) \mathbb{P}_{\mathcal{X}}(U=u)&=\mathbb{P}_{\mathcal{X}}(Y=0 \mid A=0, U=1) \mathbb{P}_{\mathcal{X}}(U=1) + \mathbb{P}_{\mathcal{X}}(Y=0 \mid A=0, U=0) \mathbb{P}_{\mathcal{X}}(U=0)\\
+    &= 0.5 * 1/2 + 0.75 * 1/2\\
+    &= 0.625 \text{\quad (match)}
+\end{align*}
+
+\subsection{(f)}
+
+\begin{align*}
+    % \mathbb{P}_{\mathcal{X}}(Y \mid \operatorname{do}(A=1))&=0.425\\
+    &\sum_{m \in\{0,1\}} \mathbb{P}_{\mathcal{X}}(M=m \mid A=0) \sum_{a^{\prime} \in\{0,1\}}\left(\mathbb{P}_{\mathcal{X}}\left(Y \mid M=m, A=a^{\prime}\right) \mathbb{P}_{\mathcal{X}}\left(A=a^{\prime}\right)\right)\\
+    &=
+\end{align*}
+
+\section{Problem 2}
+
+\subsection{(a)}
+(Ask whether we start from $\mathbf{V}=\overline{\operatorname{an}}_{\mathcal{G}}(\mathbf{A} \cup \mathbf{B} \cup \mathbf{S})$)
+By the setting, $\mathbf{V}=\overline{\operatorname{an}}_{\mathcal{G}}(\mathbf{A} \cup \mathbf{B} \cup \mathbf{S})$. 
+Since $\gamma$ is d-connecting path, all nodes in $\gamma$ are unblocked. 
+For a node to be unblocked, either 1) it is not collider and not in $S$ or 2) it is collider but it is not in $S$ and so is its decendents.
+In both cases, the node is not in $\mathbf{S}$. In addition, since the definition of path doesn't include starting and end point which are in $A$ and $B$ respectively, we can exlcude the self $A\cup B\cup S$ from $V$, i.e.   $\mathbf{V}=\operatorname{an}_{\mathcal{G}}(\mathbf{A} \cup \mathbf{B} \cup \mathbf{S})_\blacksquare$ 
+
+\subsection{(b)}
+
+Since there exists a d-connecting path $\gamma$, 
+$(\mathbf{A}, \mathbf{B}, \mathbf{S}) \notin \mathcal{I}_{\Perp}(\mathcal{G})$.
+Since all nodes in $\gamma$ doesn't include any node in $S$ as shown in $(a)$, we can use $\gamma$ as a path in $\overline{\mathcal{G}[\mathbf{V}]}$ from $A$ to $B$ which doesn't pass through $S$ by replacing the directed edges to undirected ones.
+
+\section{Problem 3}
+
+\subsection{(a)}
+\begin{align*}
+    \mathbb{P}_{\mathcal{X}}(Y=1 \mid A=N) &= \sum_{S \in \{L, R\}}\mathbb{P}_{\mathcal{X}}(Y=1 \mid S, A=N) \mathbb{P}_{\mathcal{X}}(S)\\   
+    &= 0.73 \cdot 0.49 + 0.93 \cdot  0.51 \\
+    &= 0.832\\
+    \mathbb{P}_{\mathcal{X}}(Y=1 \mid A=O) &= \sum_{S \in \{L, R\}}\mathbb{P}_{\mathcal{X}}(Y=1 \mid S, A=O) \mathbb{P}_{\mathcal{X}}(S)\\   
+    &= 0.69 \cdot 0.49 + 0.87 \cdot  0.51 \\
+    &= 0.7818
+\end{align*}
+
+\subsection{(b)}
+(Ask how to draw $\zeta^I$)
+Since $S$ satisfies backdoor criterion,  we can say 
+
+$\mathbb{P}_{\mathcal{X}}(Y=1 \mid \operatorname{do}(A=N)) = \sum_{\mathbf{s}} \mathbb{P}_{\mathcal{X}}(Y \mid A=N, \mathbf{S}=\mathbf{s}) \mathbb{P}_{\mathcal{X}}(\mathbf{S}=\mathbf{s})=0.832$ and 
+$\mathbb{P}_{\mathcal{X}}(Y=1 \mid \operatorname{do}(A=O)) = \sum_{\mathbf{s}} \mathbb{P}_{\mathcal{X}}(Y \mid A=O, \mathbf{S}=\mathbf{s}) \mathbb{P}_{\mathcal{X}}(\mathbf{S}=\mathbf{s})=0.7818$.
+
+\section{Problem 4}
 
 \end{document}

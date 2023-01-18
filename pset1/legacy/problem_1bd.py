@@ -92,12 +92,56 @@ def get_Y1_M0A1(YMAU):
 print("Y1_M0A1: ", get_Y1_M0A1(YMAU))
 
 # Below for (d)
-def get_Y1_A1(YMAU):
-    return sum([YMAU[(1,m,1,u)] for m in [0,1] for u in [0,1]])
-print("Y1_A1: ", get_Y1_A1(YMAU))
-print("Y0_A1: ", 1-get_Y1_A1(YMAU))
+YMU = {(0, 0, 0): 
 
-def get_Y1_A0(YMAU):
-    return sum([YMAU[(1,m,0,u)] for m in [0,1] for u in [0,1]])
-print("Y1_A0: ", get_Y1_A0(YMAU))
-print("Y0_A0: ", 1-get_Y1_A0(YMAU))
+
+def get_Y1_bar_doA1(YMAU):
+    return sum([YMAU[(1,m,1,u)] for m, u in [(0,0), (0,1), (1,0), (1,1)]])/sum([YMAU[(y,m,1,u)] for y in [0,1] for m in [0,1] for u in [0,1]])
+
+def get_Y0_bar_doA1(YMAU):
+    return sum([YMAU[(0,m,1,u)] for m, u in [(0,0), (0,1), (1,0), (1,1)]])/sum([YMAU[(y,m,1,u)] for y in [0,1] for m in [0,1] for u in [0,1]])
+
+print("Y1_bar_doA1: ", get_Y1_bar_doA1(YMAU))
+print("Y0_bar_doA1: ", get_Y0_bar_doA1(YMAU))
+
+def get_Y1_bar_doA0(YMAU):
+    return sum([YMAU[(1,m,0,u)] for m, u in [(0,0), (0,1), (1,0), (1,1)]])/sum([YMAU[(y,m,0,u)] for y in [0,1] for m in [0,1] for u in [0,1]])
+
+def get_Y0_bar_doA0(YMAU):
+    return sum([YMAU[(0,m,0,u)] for m, u in [(0,0), (0,1), (1,0), (1,1)]])/sum([YMAU[(y,m,0,u)] for y in [0,1] for m in [0,1] for u in [0,1]])
+
+print("Y1_bar_doA0: ", get_Y1_bar_doA0(YMAU))
+print("Y0_bar_doA0: ", get_Y0_bar_doA0(YMAU))
+
+# Below for (e)
+def get_YAU(YMAU):
+    YAU = {}
+    for y in [0,1]:
+        for a in [0,1]:
+            for u in [0,1]:
+                YAU[(y,a,u)] = sum([YMAU[(y,m,a,u)] for m in [0,1]])
+    return YAU
+
+YAU = get_YAU(YMAU)
+print("YAU: ", YAU, sum(YAU.values()))
+
+def get_Y_bar_AU(YAU, AU, y, a, u):
+    if AU[(a,u)] != 0:
+        return YAU[(y,a,u)]/AU[(a,u)]
+    else:
+        return 0
+
+print("Y1_bar_A1U1: ", get_Y_bar_AU(YAU, AU, 1, 1, 1))
+print("Y0_bar_A1U1: ", get_Y_bar_AU(YAU, AU, 0, 1, 1))
+
+print("Y1_bar_A1U0: ", get_Y_bar_AU(YAU, AU, 1, 1, 0))
+print("Y0_bar_A1U0: ", get_Y_bar_AU(YAU, AU, 0, 1, 0))
+
+print("Y1_bar_A0U1: ", get_Y_bar_AU(YAU, AU, 1, 0, 1))
+print("Y0_bar_A0U1: ", get_Y_bar_AU(YAU, AU, 0, 0, 1))
+
+print("Y1_bar_A0U0: ", get_Y_bar_AU(YAU, AU, 1, 0, 0))
+print("Y0_bar_A0U0: ", get_Y_bar_AU(YAU, AU, 0, 0, 0))
+
+print("Y1_bar_doA1: ", get_Y_bar_AU(YAU, AU, 1, 1, 1)*1/2 + get_Y_bar_AU(YAU, AU, 1, 1, 0)*1/2)
+print("Y1_bar_doA0: ", get_Y_bar_AU(YAU, AU, 1, 0, 1)*1/2 + get_Y_bar_AU(YAU, AU, 1, 0, 0)*1/2)
