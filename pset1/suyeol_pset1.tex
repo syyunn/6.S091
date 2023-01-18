@@ -27,7 +27,7 @@
 \section{Preliminaries}
 \subsection{(a)} 
 \begin{align*}
-\mathbb{P}_{\mathcal{X}} &= P(U)P(A|U)P(M|A)P(Y|M, U) \\
+\mathbb{P}_{\mathcal{X}}(Y,A,M,U) &= P(U)P(A|U)P(M|A)P(Y|M, U) \\
 &= \operatorname{Ber}(0.5) \operatorname{Ber}(U/4) \operatorname{Ber}(0.5 + 0.1A)\operatorname{Ber}(M/2 + U/4)
 \end{align*}
 
@@ -113,17 +113,17 @@
 \subsection{(c)}
 
 \begin{align*}
-\mathbb{P}_{\mathcal{X}}(U, A^I=1, M, Y \mid \operatorname{do}(A=1)) &=  P(U)P(M|A=1)P(Y|M, U, A=1)\\
-&= \operatorname{Ber}(0.5)\cdot\operatorname{Ber}(0.6)\cdot\operatorname{Ber}(M/2 + U/4)\\
-&= \operatorname{Ber}(0.5)\cdot\operatorname{Ber}(0.6)\cdot\operatorname{Ber}(M/2 + U/4)
+\mathbb{P}_{\mathcal{X}}(U, A, M, Y \mid \operatorname{do}(A=1)) &=  P(U)P(A=1|A=1)P(M|A=1)P(Y|M, U)\\
+&= \operatorname{Ber}(0.5)\cdot1\cdot\operatorname{Ber}(0.6)\cdot\operatorname{Ber}(M/2 + U/4)\\
+&= \operatorname{Ber}(0.5)\cdot1\cdot\operatorname{Ber}(0.6)\cdot\operatorname{Ber}(M/2 + U/4)
 \end{align*}    
 
 \begin{align*}
-    \mathbb{P}_{\mathcal{X}}(U, A^I=1, M, Y \mid \operatorname{do}(A=0)) &=  P(U)P(M|A=0)P(Y|M, U, A=0)\\
-    &= \operatorname{Ber}(0.5)\cdot\operatorname{Ber}(0.5)\cdot\operatorname{Ber}(M/2 + U/4)\\
-    &= \operatorname{Ber}(0.5)\cdot\operatorname{Ber}(0.5)\cdot\operatorname{Ber}(M/2 + U/4)
-    \end{align*}    
-    
+    \mathbb{P}_{\mathcal{X}}(U, A, M, Y \mid \operatorname{do}(A=0)) &=  P(U)P(A=0|A=0)P(M|A=0)P(Y|M, U)\\
+    &= \operatorname{Ber}(0.5)\cdot1\cdot\operatorname{Ber}(0.5)\cdot\operatorname{Ber}(M/2 + U/4)\\
+    &= \operatorname{Ber}(0.5)\cdot1\cdot\operatorname{Ber}(0.5)\cdot\operatorname{Ber}(M/2 + U/4)
+\end{align*}    
+        
 
 \subsection{(d)}
 % \begin{align*}
@@ -218,7 +218,7 @@ Since all nodes in $\gamma$ doesn't include any node in $S$ as shown in $(a)$, w
 \end{align*}
 
 \subsection{(b)}
-(Ask how to draw $\zeta^I$)
+% (Ask how to draw $\zeta^I$)
 Since $S$ satisfies backdoor criterion,  we can say 
 
 $\mathbb{P}_{\mathcal{X}}(Y=1 \mid \operatorname{do}(A=N)) = \sum_{\mathbf{s}} \mathbb{P}_{\mathcal{X}}(Y \mid A=N, \mathbf{S}=\mathbf{s}) \mathbb{P}_{\mathcal{X}}(\mathbf{S}=\mathbf{s})=0.832$ and 
