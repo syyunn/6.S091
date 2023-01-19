@@ -4,6 +4,18 @@
 \usepackage[margin=0.5in]{geometry} 
 \usepackage{amsmath,amsthm,amssymb, graphicx, multicol, array, txfonts}
 \usepackage{bbm}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+\urlstyle{same}
+
 
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -27,101 +39,34 @@
 \section{Preliminaries}
 \subsection{(a)} 
 \begin{align*}
-\mathbb{P}_{\mathcal{X}}(Y,A,M,U) &= P(U)P(A|U)P(M|A)P(Y|M, U) \\
+\mathbb{P}_{\mathcal{X}}(U, A, M, Y) &= P(U)P(A|U)P(M|A)P(Y|M, U) \\
 &= \operatorname{Ber}(0.5) \operatorname{Ber}(U/4) \operatorname{Ber}(0.5 + 0.1A)\operatorname{Ber}(M/2 + U/4)
 \end{align*}
 
-\subsection{(b)} 
+\subsection{(b)}
 \begin{align*}
 &\mathbb{P}_{\mathcal{X}}(Y=1) = 0.38125\\
 &\mathbb{P}_{\mathcal{X}}(Y=1 \mid M=0, A=0)= 0.10714285714285714\\
 &\mathbb{P}_{\mathcal{X}}(Y=1 \mid M=0, A=1)= 0.25\\
 \end{align*}
+* I computed the above values by computing the distribution $\mathbb{P}_{\mathcal{X}}(U, A, M, Y)$ as dictionary in python and marginalized. 
+See \url{https://github.com/syyunn/6.S091/blob/main/pset1/problem_1b.py}
 
-
-% \begin{align*}
-%     P(Y|M=0, A=0) &= \mathbbm{1}_{\left\{\varepsilon_y+U / 4 \geq 1\right\}} \sim \operatorname{Ber}(U/4)\\
-%     P(Y=1|M=0, A=0) &= P(Y=1|M=0, A=0, U=0)P(U=0) \\ &+ P(Y=1|M=0, A=0, U=1)P(U=1)\\
-%     &= 0 \cdot 1/2 + 1/4 \cdot 1/2\\
-%     &= 1/8\\
-%     P(Y=1|M=0, A=1) &= P(Y=1|M=0, A=0)\\
-%     &= 1/8
-% \end{align*}
-
-
-% % Since $U, A, M, Y$ are all have a set of alphabets $\{0, 1\}$, they follows Bernoulli distribution.
-% % Then remaining task is to find the parameter of Bernoulli distribution for each variable.
-% \begin{align*}
-% \end{align*}
-
-
-% \begin{align*}
-%     \mathbb{P}(A=1) &=\sum_{U \in \{0,1\}}\mathbb{P}(A=1|U)P(U) && (\text{Law of Total Probability})\\
-%     &=\sum_{U \in \{0,1\}}\mathbb{P}(\epsilon_a+U/4\ge1)P(U) \\
-%     &=\sum_{U \in \{0,1\}}\mathbb{P}(\epsilon_a\ge1-U/4)P(U) \\
-%     &=\mathbb{P}(\epsilon_a\ge 3/4)P(U=1) + \mathbb{P}(\epsilon_a\ge 1)P(U=0) \\
-%     &=1/4\cdot1/2 + 0\cdot 1/2\\
-%     &=1/8
-% \end{align*}
-
-% \begin{align*}
-%     \mathbb{P}(M=1) &=\sum_{A \in \{0,1\}}\mathbb{P}(M=1|A)P(A) && (\text{Law of Total Probability})\\
-%     &=\sum_{A \in \{0,1\}}\mathbb{P}(\varepsilon_m+10(1-A) \leq 60)P(A) \\
-%     &=\sum_{A \in \{0,1\}}\mathbb{P}(\varepsilon_m \leq 60-10(1-A))P(A) \\
-%     &=\mathbb{P}(\varepsilon_m \leq 60)P(A=1) + \mathbb{P}(\varepsilon_m \leq 50)P(A=0) \\
-%     &=3/5\cdot1/8 + 1/2\cdot7/8\\
-%     &=41/80
-% \end{align*}
-
-% \begin{align*}
-%     \mathbb{P}(Y=1) &=\sum_{M \times U \in \{0,1\} \times \{0,1 \}} \mathbb{P}(Y=1|M, U)P(M, U) && (\text{Law of Total Probability})\\
-%     &=\sum_{M \times U \in \{0,1\} \times \{0,1 \}} \mathbb{P}(Y=1|M, U)P(M|U)P(U)\\
-%     &=\sum_{M \in \{0,1\}} \mathbb{P}(Y=1|M, U=0)P(M|U=0)P(U=0) \\ &+ \sum_{M \in \{0,1\}} \mathbb{P}(Y=1|M, U=1)P(M|U=1)P(U=1)\\
-%     &=\mathbb{P}(Y=1|M=0, U=0)P(M=0|U=0)\cdot 1/2 \\& + \mathbb{P}(Y=1|M=1, U=0)P(M=1|U=0)\cdot 1/2 \\ &+ \mathbb{P}(Y=1|M=0, U=1)P(M=0|U=1)\cdot 1/2 \\ &+\mathbb{P}(Y=1|M=1, U=1)P(M=1|U=1)\cdot 1/2\\
-%     &=0\cdot 41/80 \cdot 1/2 \\
-%     & + 1/2 \cdot 39/80 \cdot 1/2 \\ 
-%     &+ 1/4 \cdot 39/80 \cdot 1/2 \\ 
-%     &+ 3/4 \cdot 41/80 \cdot 1/2\\
-%     &=3/8
-% \end{align*}
-
-% In the above calculation, it's worth noting that $U$ nad $M$ are correlated via $A$, i.e. $U \rightarrow A \rightarrow M$. $M$ and $U$ are not independent and thus, $P(M|U)$ is computed as follows.
-
-% \begin{align*}
-%     P(M=0|U=0) &=  P(M=0, A=0|U=0)P(A=0|U=0) + P(M=0, A=1|U=0)P(A=1|U=0) \\
-%     &=1/2 \cdot 7/8 + 3/5 \cdot 1/8 \\
-%     &=41/80\\
-% P(M=1|U=0) &= 1- 41/80 = 39/80 && \\
-% P(M=0|U=1) &=  P(M=0|U=1, A=0)P(A=0) + P(M=0|U=1, A=1)P(A=1) \\
-% &=1/2 \cdot 7/8 + 2/5 \cdot 1/8 \\
-% &=39/80\\
-% P(M=1|U=1) &=  41/80 \\
-% \end{align*}
-
-% \begin{align*}
-%     P(M=0|U=0) &=  P(M=0|U=0, A=0)P(A=0) + P(M=0|U=0, A=1)P(A=1) \\
-%     &=1/2 \cdot 7/8 + 3/5 \cdot 1/8 \\
-%     &=41/80\\
-% P(M=1|U=0) &= 1- 41/80 = 39/80 && \\
-% P(M=0|U=1) &=  P(M=0|U=1, A=0)P(A=0) + P(M=0|U=1, A=1)P(A=1) \\
-% &=1/2 \cdot 7/8 + 2/5 \cdot 1/8 \\
-% &=39/80\\
-% P(M=1|U=1) &=  41/80 \\
-% \end{align*}
 
 \section{Interventional}
 \subsection{(c)}
 
 \begin{align*}
-\mathbb{P}_{\mathcal{X}}(U, A, M, Y \mid \operatorname{do}(A=1)) &=  P(U)P(A=1|A=1)P(M|A=1)P(Y|M, U)\\
+\mathbb{P}_{\mathcal{X}}(U, A=1, M, Y \mid \operatorname{do}(A=1)) &=  P(U)P(A=1|A=1)P(M|A=1)P(Y|M, U, A=1)\\
 &= \operatorname{Ber}(0.5)\cdot1\cdot\operatorname{Ber}(0.6)\cdot\operatorname{Ber}(M/2 + U/4)\\
-&= \operatorname{Ber}(0.5)\cdot1\cdot\operatorname{Ber}(0.6)\cdot\operatorname{Ber}(M/2 + U/4)
+&= \operatorname{Ber}(0.5)\cdot\operatorname{Ber}(0.6)\cdot\operatorname{Ber}(M/2 + U/4)
 \end{align*}    
 
+In the similar vein, we can compute
 \begin{align*}
-    \mathbb{P}_{\mathcal{X}}(U, A, M, Y \mid \operatorname{do}(A=0)) &=  P(U)P(A=0|A=0)P(M|A=0)P(Y|M, U)\\
+    \mathbb{P}_{\mathcal{X}}(U, A=1, M, Y \mid \operatorname{do}(A=0)) &=  P(U)P(A=0|A=0)P(M|A=0)P(Y|M, U, A=1)\\
     &= \operatorname{Ber}(0.5)\cdot1\cdot\operatorname{Ber}(0.5)\cdot\operatorname{Ber}(M/2 + U/4)\\
-    &= \operatorname{Ber}(0.5)\cdot1\cdot\operatorname{Ber}(0.5)\cdot\operatorname{Ber}(M/2 + U/4)
+    &= \operatorname{Ber}(0.5)\cdot\operatorname{Ber}(0.5)\cdot\operatorname{Ber}(M/2 + U/4)
 \end{align*}    
         
 
@@ -165,45 +110,97 @@
         0.625 & \text{if $Y=0$}
     \end{cases}
   \end{equation}
+\\
+* I computed the above values by computing the distribution $\mathbb{P}_{\mathcal{X}}(U, A, M, Y)$ as dictionary in python and marginalized. 
+See \url{https://github.com/syyunn/6.S091/blob/main/pset1/problem_1d_doA0.py} and \url{https://github.com/syyunn/6.S091/blob/main/pset1/problem_1d_doA1.py} 
+
 
 \subsection{(e)}
-If $A=1, U=0$, $P(A=1, U=0)=0$.  Therefore, $P(Y|A=1, U=0)$ is undefined. So I check only for the case of $do(A=0)$ which doesn't involve $P(Y|A=1, U=0)$ as a component in its process of computation. \\
+In case of $do(A=0)$, we have
+% If $A=1, U=0$, $P(A=1, U=0)=0$.  Therefore, $P(Y|A=1, U=0)$ is undefined. So I check only for the case of $do(A=0)$ which doesn't involve $P(Y|A=1, U=0)$ as a component in its process of computation. \\
 \begin{align*}
-    \mathbb{P}_{\mathcal{X}}(Y=1 \mid \operatorname{do}(A=0))&=0.375\\
+    \mathbb{P}_{\mathcal{X}}(Y=1 \mid \operatorname{do}(A=0))&=0.375 \quad \text{from (d)}\\
     \sum_{u \in\{0,1\}} \mathbb{P}_{\mathcal{X}}(Y=1 \mid A=0, U=u) \mathbb{P}_{\mathcal{X}}(U=u)&=\mathbb{P}_{\mathcal{X}}(Y=1 \mid A=0, U=1) \mathbb{P}_{\mathcal{X}}(U=1) + \mathbb{P}_{\mathcal{X}}(Y=1 \mid A=0, U=0) \mathbb{P}_{\mathcal{X}}(U=0)\\
     &= 0.5 * 1/2 + 0.25 * 1/2\\
     &= 0.375 \text{\quad (match)}
 \end{align*}
 
 \begin{align*}
-    \mathbb{P}_{\mathcal{X}}(Y=0 \mid \operatorname{do}(A=0))&=0.625\\
+    \mathbb{P}_{\mathcal{X}}(Y=0 \mid \operatorname{do}(A=0))&=0.625 \quad \text{from (d)}\\
     \sum_{u \in\{0,1\}} \mathbb{P}_{\mathcal{X}}(Y=0 \mid A=0, U=u) \mathbb{P}_{\mathcal{X}}(U=u)&=\mathbb{P}_{\mathcal{X}}(Y=0 \mid A=0, U=1) \mathbb{P}_{\mathcal{X}}(U=1) + \mathbb{P}_{\mathcal{X}}(Y=0 \mid A=0, U=0) \mathbb{P}_{\mathcal{X}}(U=0)\\
     &= 0.5 * 1/2 + 0.75 * 1/2\\
     &= 0.625 \text{\quad (match)}
 \end{align*}
 
-\subsection{(f)}
+In case of $do(A=1)$, we have
+% If $A=1, U=0$, $P(A=1, U=0)=0$.  Therefore, $P(Y|A=1, U=0)$ is undefined. So I check only for the case of $do(A=0)$ which doesn't involve $P(Y|A=1, U=0)$ as a component in its process of computation. \\
+\begin{align*}
+    \mathbb{P}_{\mathcal{X}}(Y=1 \mid \operatorname{do}(A=1))&=0.425 \quad \text{from (d)}\\
+    \sum_{u \in\{0,1\}} \mathbb{P}_{\mathcal{X}}(Y=1 \mid A=1, U=u) \mathbb{P}_{\mathcal{X}}(U=u)&=\mathbb{P}_{\mathcal{X}}(Y=1 \mid A=1, U=1) \mathbb{P}_{\mathcal{X}}(U=1) + \mathbb{P}_{\mathcal{X}}(Y=1 \mid A=1, U=0) \mathbb{P}_{\mathcal{X}}(U=0)\\
+    &= 0.55 * 1/2 + \text{undefined}\\
+    &= \text{undefined}
+\end{align*}
 
 \begin{align*}
-    % \mathbb{P}_{\mathcal{X}}(Y \mid \operatorname{do}(A=1))&=0.425\\
-    &\sum_{m \in\{0,1\}} \mathbb{P}_{\mathcal{X}}(M=m \mid A=0) \sum_{a^{\prime} \in\{0,1\}}\left(\mathbb{P}_{\mathcal{X}}\left(Y \mid M=m, A=a^{\prime}\right) \mathbb{P}_{\mathcal{X}}\left(A=a^{\prime}\right)\right)\\
-    &=
+    \mathbb{P}_{\mathcal{X}}(Y=0 \mid \operatorname{do}(A=1))&=0.625 \quad \text{from (d)}\\
+    \sum_{u \in\{0,1\}} \mathbb{P}_{\mathcal{X}}(Y=0 \mid A=1, U=u) \mathbb{P}_{\mathcal{X}}(U=u)&=\mathbb{P}_{\mathcal{X}}(Y=0 \mid A=1, U=1) \mathbb{P}_{\mathcal{X}}(U=1) + \mathbb{P}_{\mathcal{X}}(Y=0 \mid A=1, U=0) \mathbb{P}_{\mathcal{X}}(U=0)\\
+    &= 0.45 * 1/2 + \text{undefined}\\
+    &= \text{undefined}
+\end{align*}
+
+
+\subsection{(f)}
+
+In case of $do(A=0)$, we have
+
+\begin{align*}
+    &\mathbb{P}_{\mathcal{X}}(Y=1 \mid \operatorname{do}(A=0))=0.375 \quad \text{from (d)}\\
+    &\sum_{m \in\{0,1\}} \mathbb{P}_{\mathcal{X}}(M=m \mid A=0) \sum_{a^{\prime} \in\{0,1\}}\left(\mathbb{P}_{\mathcal{X}}\left(Y=1 \mid M=m, A=a^{\prime}\right) \mathbb{P}_{\mathcal{X}}\left(A=a^{\prime}\right)\right)\\
+    &= \mathbb{P}_{\mathcal{X}}(M=0 \mid A=0) \cdot \sum_{a^{\prime} \in\{0,1\}}\left(\mathbb{P}_{\mathcal{X}}\left(Y=1 \mid M=0, A=a^{\prime}\right) \mathbb{P}_{\mathcal{X}}\left(A=a^{\prime}\right)\right) \\ 
+    &+ \mathbb{P}_{\mathcal{X}}(M=1 \mid A=0) \cdot \sum_{a^{\prime} \in\{0,1\}}\left(\mathbb{P}_{\mathcal{X}}\left(Y=1 \mid M=1, A=a^{\prime}\right) \mathbb{P}_{\mathcal{X}}\left(A=a^{\prime}\right)\right) \\
+    &= 1/2 \cdot (0.10714285714285714\cdot 0.875 + 0.25 \cdot 0.125) + 1/2 \cdot(0.6071428571428571 \cdot 0.875 + 0.75\cdot 0.125)\\
+    &= 0.375 \text{\quad (match)}\\\\
+    &\mathbb{P}_{\mathcal{X}}(Y=0 \mid \operatorname{do}(A=0))=0.625 \quad \text{from (c)}\\
+    &\sum_{m \in\{0,1\}} \mathbb{P}_{\mathcal{X}}(M=m \mid A=0) \sum_{a^{\prime} \in\{0,1\}}\left(\mathbb{P}_{\mathcal{X}}\left(Y=0 \mid M=m, A=a^{\prime}\right) \mathbb{P}_{\mathcal{X}}\left(A=a^{\prime}\right)\right)\\
+    &= \mathbb{P}_{\mathcal{X}}(M=0 \mid A=0) \cdot \sum_{a^{\prime} \in\{0,1\}}\left(\mathbb{P}_{\mathcal{X}}\left(Y=0 \mid M=0, A=a^{\prime}\right) \mathbb{P}_{\mathcal{X}}\left(A=a^{\prime}\right)\right) \\ 
+    &+ \mathbb{P}_{\mathcal{X}}(M=1 \mid A=0) \cdot \sum_{a^{\prime} \in\{0,1\}}\left(\mathbb{P}_{\mathcal{X}}\left(Y=0 \mid M=1, A=a^{\prime}\right) \mathbb{P}_{\mathcal{X}}\left(A=a^{\prime}\right)\right) \\
+    &= 1/2 \cdot (0.8928571428571429\cdot 0.875 + 0.7500000000000001 \cdot 0.125) + 1/2 \cdot(0.39285714285714285 \cdot 0.875 + 0.25\cdot 0.125)\\
+    &= 0.6250000000000000218750 \text{\quad (match)}
+\end{align*}
+
+In case of $do(A=1)$, we have
+
+\begin{align*}
+    &\mathbb{P}_{\mathcal{X}}(Y=1 \mid \operatorname{do}(A=1))=0.425 \quad \text{from (d)}\\
+    &\sum_{m \in\{0,1\}} \mathbb{P}_{\mathcal{X}}(M=m \mid A=1) \sum_{a^{\prime} \in\{0,1\}}\left(\mathbb{P}_{\mathcal{X}}\left(Y=1 \mid M=m, A=a^{\prime}\right) \mathbb{P}_{\mathcal{X}}\left(A=a^{\prime}\right)\right)\\
+    &= \mathbb{P}_{\mathcal{X}}(M=0 \mid A=1) \cdot \sum_{a^{\prime} \in\{0,1\}}\left(\mathbb{P}_{\mathcal{X}}\left(Y=1 \mid M=0, A=a^{\prime}\right) \mathbb{P}_{\mathcal{X}}\left(A=a^{\prime}\right)\right) \\ 
+    &+ \mathbb{P}_{\mathcal{X}}(M=1 \mid A=1) \cdot \sum_{a^{\prime} \in\{0,1\}}\left(\mathbb{P}_{\mathcal{X}}\left(Y=1 \mid M=1, A=a^{\prime}\right) \mathbb{P}_{\mathcal{X}}\left(A=a^{\prime}\right)\right) \\
+    &= 0.4 \cdot (0.10714285714285714\cdot 0.875 + 0.25 \cdot 0.125) + 0.6 \cdot(0.6071428571428571 \cdot 0.875 + 0.75\cdot 0.125)\\
+    &= 0.42499999999999997650 \text{\quad (match)}\\\\
+    &\mathbb{P}_{\mathcal{X}}(Y=0 \mid \operatorname{do}(A=1))=0.575 \quad \text{from (c)}\\
+    &\sum_{m \in\{0,1\}} \mathbb{P}_{\mathcal{X}}(M=m \mid A=1) \sum_{a^{\prime} \in\{0,1\}}\left(\mathbb{P}_{\mathcal{X}}\left(Y=0 \mid M=m, A=a^{\prime}\right) \mathbb{P}_{\mathcal{X}}\left(A=a^{\prime}\right)\right)\\
+    &= \mathbb{P}_{\mathcal{X}}(M=0 \mid A=1) \cdot \sum_{a^{\prime} \in\{0,1\}}\left(\mathbb{P}_{\mathcal{X}}\left(Y=0 \mid M=0, A=a^{\prime}\right) \mathbb{P}_{\mathcal{X}}\left(A=a^{\prime}\right)\right) \\ 
+    &+ \mathbb{P}_{\mathcal{X}}(M=1 \mid A=1) \cdot \sum_{a^{\prime} \in\{0,1\}}\left(\mathbb{P}_{\mathcal{X}}\left(Y=0 \mid M=1, A=a^{\prime}\right) \mathbb{P}_{\mathcal{X}}\left(A=a^{\prime}\right)\right) \\
+    &= 0.4 \cdot (0.8928571428571429\cdot 0.875 + 0.7500000000000001 \cdot 0.125) + 0.6 \cdot(0.39285714285714285 \cdot 0.875 + 0.25\cdot 0.125)\\
+    &= 0.57500000000000001625 \text{\quad (match)}
 \end{align*}
 
 \section{Problem 2}
 
 \subsection{(a)}
-(Ask whether we start from $\mathbf{V}=\overline{\operatorname{an}}_{\mathcal{G}}(\mathbf{A} \cup \mathbf{B} \cup \mathbf{S})$)
-By the setting, $\mathbf{V}=\overline{\operatorname{an}}_{\mathcal{G}}(\mathbf{A} \cup \mathbf{B} \cup \mathbf{S})$. 
-Since $\gamma$ is d-connecting path, all nodes in $\gamma$ are unblocked. 
-For a node to be unblocked, either 1) it is not collider and not in $S$ or 2) it is collider but it is not in $S$ and so is its decendents.
-In both cases, the node is not in $\mathbf{S}$. In addition, since the definition of path doesn't include starting and end point which are in $A$ and $B$ respectively, we can exlcude the self $A\cup B\cup S$ from $V$, i.e.   $\mathbf{V}=\operatorname{an}_{\mathcal{G}}(\mathbf{A} \cup \mathbf{B} \cup \mathbf{S})_\blacksquare$ 
+
+Let's take a arbitrary node $\gamma_m \in \gamma$. Then $\gamma_m$ should be unblocked since $\gamma$ is d-connecting path and it means all nodes in $\gamma$ are unblocked.
+Then since $\gamma_m$ is unblocked, we can think of two cases where $\gamma_m$ is collider or $\gamma_m$ is non-collider. First, in case of $\gamma_m$ is collider, then $\gamma_m\in S$ or its descendent $\text{de}_{\mathcal{G}}(\gamma_m) \in S$. If $\gamma_m \in S$, $\gamma_m \in V$ since $V$ include $S$ itself. If $\text{de}_{\mathcal{G}}(\gamma_m) \in S$, $\gamma_m \in \text{an}_\mathcal{G}(S)$, and it implies $\gamma_m \in V$. 
+Second, in case of $\gamma_m$ is non-collider, $\gamma_m \notin S$. In this case, let's think about the sub-path $\gamma_m \rightarrow \gamma_{m+1}, \gamma_{m+2}, \cdots, b$ where $b$ is the destination of the path $\gamma$. Among the nodes in this sub-path, if there exists a node that is collider, then this node is in $S$ or ancestor of $S$ as we've shown in the first scenario. Then $\gamma_m$ becomes ancestor of $S$ and it implies $\gamma_m \in V$. 
+In other case, if there is no collider in the sub-path, 
+then $\gamma_m$ is an ancestor of $b$ and it implies $\gamma_m \in V$.
+Therefore, in any cases, $\gamma_m \in V$.
 
 \subsection{(b)}
 
-Since there exists a d-connecting path $\gamma$, 
-$(\mathbf{A}, \mathbf{B}, \mathbf{S}) \notin \mathcal{I}_{\Perp}(\mathcal{G})$.
-Since all nodes in $\gamma$ doesn't include any node in $S$ as shown in $(a)$, we can use $\gamma$ as a path in $\overline{\mathcal{G}[\mathbf{V}]}$ from $A$ to $B$ which doesn't pass through $S$ by replacing the directed edges to undirected ones.
+From $(a)$, we know that $\gamma_m \in S$ only in case that $\gamma_m$ is collider. By the definition of moral graph, if $\gamma_m$ is collider, we can marry 
+$\gamma_{m-1}$ and $\gamma_{m+1}$ which are left and right nodes of $\gamma_m$. Therefore, with given path $\gamma$, we can construct a new path $\gamma'$ by visiting each node in $\gamma$ and marry left and right nodes when the node we're visiting is collider. Then this new path $\gamma'$ doesn't pass through $S$ and 
+$\gamma'$ is a valid path in moral graph $\overline{\mathcal{G}[\mathbf{V}]}$ since its all nodes and edges are included in $\overline{\mathcal{G}[\mathbf{V}]}$.
 
 \section{Problem 3}
 
@@ -219,26 +216,33 @@ Since all nodes in $\gamma$ doesn't include any node in $S$ as shown in $(a)$, w
 
 \subsection{(b)}
 % (Ask how to draw $\zeta^I$)
-Since $S$ satisfies backdoor criterion,  we can say 
-
+Since $S$ satisfies backdoor criterion, 
 $\mathbb{P}_{\mathcal{X}}(Y=1 \mid \operatorname{do}(A=N)) = \sum_{\mathbf{s}} \mathbb{P}_{\mathcal{X}}(Y \mid A=N, \mathbf{S}=\mathbf{s}) \mathbb{P}_{\mathcal{X}}(\mathbf{S}=\mathbf{s})=0.832$ and 
 $\mathbb{P}_{\mathcal{X}}(Y=1 \mid \operatorname{do}(A=O)) = \sum_{\mathbf{s}} \mathbb{P}_{\mathcal{X}}(Y \mid A=O, \mathbf{S}=\mathbf{s}) \mathbb{P}_{\mathcal{X}}(\mathbf{S}=\mathbf{s})=0.7818$.
 
 \section{Problem 4}
 
 \begin{center}
-    \begin{tabular}{||c c c c||} 
+    \begin{tabular}{||c c c c c||} 
      \hline
-     $\beta_{aw}$ & $\hat{\beta}_{aw}$ & $\hat{\beta}_{yw}$ & $\widehat{\beta}_{y w} / \widehat{\beta}_{a w}$ \\ [0.5ex] 
+     $\beta_{aw}$ & $\hat{\beta}_{aw}$ & $\hat{\beta}_{yw}$ & $\widehat{\beta}_{y w} / \widehat{\beta}_{a w}$ & $|\mathbb{E}[Y|A] - \widehat{\beta}_{y w} / \widehat{\beta}_{a w}|$ \\ [0.5ex] 
      \hline\hline
-     5 & 4.52 & 33.84 & 7.47 \\ 
+     5 & 4.52 & 33.84 & 7.47 & 0.03\\ 
      \hline
-     0.5 & 0.72 & 5.54 & 7.60 \\
+     0.5 & 0.72 & 5.54 & 7.60 & 0.1\\
      \hline
-     0.05 & 0.32 & 2.49 & 7.62 \\
+     0.05 & 0.32 & 2.49 & 7.62 & 0.12\\
      \hline
     \end{tabular}
 \end{center}
+
+As shown in the table, the ratio well estimates the true $\mathbb{E}[Y|A]=0.75$. Also we can notice that the absolute value of bias $|\mathbb{E}[Y|A] - \widehat{\beta}_{y w} / \widehat{\beta}_{a w}|$ increases as $\beta_{aw}$ decreases.\\
+
+
+* I computed the above values by computing the distribution $\mathbb{P}_{\mathcal{X}}(U, A, M, Y)$ as dictionary in python and marginalized. 
+See \url{https://github.com/syyunn/6.S091/blob/main/pset1/problem4.py}
+
+
 
 % $\beta_{aw}: 5, b_wa_hat: 4.527291388797304, b_wy_hat: 33.847991586594546, ratio: 7.476433187037785,  b_ay: 7.5, error:0.0031422417282952844
 % b_wa: 0.5, b_wa_hat: 0.7290866735076191, b_wy_hat: 5.542779314016848, ratio: 7.602359932531293,  b_ay: 7.5, error:0.013647991004172392

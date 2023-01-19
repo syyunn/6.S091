@@ -33,7 +33,7 @@ def integrate_cond(A_bar_B: dict, B:dict):
     return A
 
 A = integrate_cond(A_bar_U, U)
-print(A)
+print("A", A)
 
 M_bar_A = get_entire_cond_prob([0,1], A, lambda b: 1/2 + 0.1*b)
 print("M_bar_A", M_bar_A, sum(M_bar_A.values()))
@@ -67,6 +67,17 @@ YAMU = get_YAMU(U, A_bar_U, M_bar_A, Y_bar_M_U)
 print("YAMU: ", YAMU, sum(YAMU.values()))
 assert sum(YAMU.values()) == 1
 
+def get_Y_bar_M_A(YAMU):   
+    Y_bar_M_A = {}
+    for y in [0,1]:
+        for m in [0,1]:
+            for a in [0,1]: 
+                Y_bar_M_A[(y,m,a)] = sum([YAMU[(y,a,m,u)] for u in [0,1]])/sum([YAMU[(y,a,m,u)] for y in [0,1] for u in [0,1]])
+    return Y_bar_M_A
+
+Y_bar_M_A = get_Y_bar_M_A(YAMU)
+print("Y_bar_M_A: ", Y_bar_M_A, sum(Y_bar_M_A.values()))
+    
 def get_Y1(YAMU):
     Y1 = sum([YAMU[(1,a,m,u)] for a in [0,1] for m in [0,1] for u in [0,1]])
     return Y1
@@ -102,3 +113,23 @@ print("Y0_bar_A0U0: ", get_Y_bar_AU(YAMU, 0, 0, 0))
 
 print("Y1_bar_A0U1: ", get_Y_bar_AU(YAMU, 1, 0, 1))
 print("Y1_bar_A0U0: ", get_Y_bar_AU(YAMU, 1, 0, 0))
+
+print("Y0_bar_A1U1: ", get_Y_bar_AU(YAMU, 0, 1, 1))
+print("Y0_bar_A1U0: ", get_Y_bar_AU(YAMU, 0, 1, 0))
+
+print("Y1_bar_M0A0: ", Y_bar_M_A[1, 0, 0])
+print("Y1_bar_M0A1: ", Y_bar_M_A[1, 0, 1])
+print("Y1_bar_M1A0: ", Y_bar_M_A[1, 1, 0])
+print("Y1_bar_M1A1: ", Y_bar_M_A[1, 1, 1])
+
+
+print("Y0_bar_M0A0: ", Y_bar_M_A[0, 0, 0])
+print("Y0_bar_M0A1: ", Y_bar_M_A[0, 0, 1])
+print("Y0_bar_M1A0: ", Y_bar_M_A[0, 1, 0])
+print("Y0_bar_M1A1: ", Y_bar_M_A[0, 1, 1])
+
+print("Y1_bar_M0A0: ", Y_bar_M_A[1, 0, 0])
+print("Y1_bar_M0A1: ", Y_bar_M_A[1, 0, 1])
+print("Y1_bar_M1A0: ", Y_bar_M_A[1, 1, 0])
+print("Y1_bar_M1A1: ", Y_bar_M_A[1, 1, 1])
+

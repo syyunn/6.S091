@@ -25,7 +25,7 @@ print("M_bar_A1", M_bar_A1, sum(M_bar_A1.values()))
 
 M = M_bar_A1
 
-def get_point_cond_prob_2var(a:int, b:int, c:int, bern: lambda b,c: b/2 + c/4):
+def get_point_cond_prob_2var(a:int, b:int, c:int, bern= lambda b,c: b/2 + c/4):
     return Bernoulli(bern(b, c))(a)
 
 def get_entire_cond_prob_2var(A_keys, B:dict, C:dict, bern: lambda b,c : b/2 + c/4):
@@ -37,7 +37,7 @@ def get_entire_cond_prob_2var(A_keys, B:dict, C:dict, bern: lambda b,c : b/2 + c
     return dist
 
 Y_bar_M_U = get_entire_cond_prob_2var([0,1], M, U, lambda b,c: b/2 + c/4)
-print(Y_bar_M_U, sum(Y_bar_M_U.values()))
+print("Y_bar_M_U", Y_bar_M_U, sum(Y_bar_M_U.values()))
 
 def get_YdoA1MU(U, M_bar_A1, Y_bar_M_U):
     YdoA1MU = {}
@@ -63,13 +63,4 @@ print("Y1_bar_doA1: ", get_Y1_bar_doA1(YdoA1MU))
 print("Y0_bar_doA1: ", get_Y0_bar_doA1(YdoA1MU))
 
 
-# def get_Y1_bar_M0A0(YAMU):
-#     Y1_bar_M0A0 = sum([YAMU[(1,0,0,u)] for u in [0,1]])/sum([YAMU[(y,0,0,u)] for y in [0,1] for u in [0,1]])
-#     return Y1_bar_M0A0
-# print(get_Y1_bar_M0A0(YAMU))
-
-# def get_Y1_bar_M0A1(YAMU):
-#     Y1_bar_M0A1 = sum([YAMU[(1,1,0,u)] for u in [0,1]])/sum([YAMU[(y,1,0,u)] for y in [0,1] for u in [0,1]])
-#     return Y1_bar_M0A1
-# print(get_Y1_bar_M0A1(YAMU))
 

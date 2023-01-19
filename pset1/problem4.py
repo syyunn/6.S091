@@ -17,7 +17,7 @@ for b_wa in B_wa:
     b_wy_hat = reg.coef_[0][0]
     # get ratio of b_wy/b_wa
     r = b_wy_hat/b_wa_hat
-    print(f"b_wa: {b_wa}, b_wa_hat: {b_wa_hat}, b_wy_hat: {b_wy_hat}, ratio: {r},  b_ay: {7.5}, error:{abs(r-7.5)/7.5}")
+    print(f"b_wa: {b_wa}, b_wa_hat: {b_wa_hat}, b_wy_hat: {b_wy_hat}, ratio: {r},  b_ay: {7.5}, error:{abs(r-7.5)}")
     ratios.append(r)
 
 
