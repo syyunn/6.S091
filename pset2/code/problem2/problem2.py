@@ -33,8 +33,22 @@ def compute_partial_correlation(samples, i, j, S):
 r1 = compute_partial_correlation(X, 1, 7, [3, 4])
 r2 = compute_partial_correlation(X, 1, 7, [])
 
+ra = compute_partial_correlation(X, 1, 4, [])
+rb = compute_partial_correlation(X, 1, 4, [2, 3])
+
+def fisherz(r):
+    return 0.5 * np.log((1 + r) / (1 - r))
+
+def ztransf(samples, i, j, S):
+    r = compute_partial_correlation(samples, i, j, S)
+    return np.sqrt(samples.shape[0]- len(S)-3) * fisherz(r)
+
+z1 = ztransf(X, 1, 7, [3, 4])
+z2 = ztransf(X, 1, 7, [])
+
+zc = ztransf(X, 1, 4, [2, 3])
 
 
 if __name__ == '__main__':
-z    pass
+    pass
 
