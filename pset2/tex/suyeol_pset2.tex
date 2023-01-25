@@ -37,26 +37,41 @@
 \maketitle
  
 \section{Problem 1}
-\subsection{Plotting Regression Residuals}
+\subsection{Plotting Regression Residuals [1 point]}
 \subsection{(a)} $\hat{\beta}_{12} = 2.0032613606359835$
 \subsection{(b)} $\hat{\beta}_{21} = 0.4853818665988653$
 
 \includegraphics{images/problem1.png}
 
-\subsection{Causal Direction Inference}
+\subsection{Causal Direction Inference [1 point]}
 
 \subsection{(c)}
 The plot explains the relationship between $\varepsilon_1$ and $\varepsilon_2$. Since $\varepsilon_1 \Perp \varepsilon_2$, we have to choose the SCM which shows such independence. Therefore, the data is more likely to be generated from SCM $M^a$.
 
 \section{Problem 2}
-\subsection{Partial correlation}
+\subsection{Partial correlation [2 points]}
 \subsection{(a)}
-$\widehat{\rho}\left(X_1, X_4, \varnothing\right) = 0.18515108160562416$
+$\hat{\rho}\left(X_1, X_4, \varnothing\right) = 0.18515108160562416$
 
 \subsection{(b)}
-$\widehat{\rho}\left(X_1, X_4, \{X_2, X_3\}\right) = 0.0093340865561515$
+$\hat{\rho}\left(X_1, X_4, \{X_2, X_3\}\right) = 0.0093340865561515$
 
+\subsection{Fisher’s z-transformation [1 point]}
 \subsection{(c)}
-$\widehat{z}\left(X_1, X_4, \{X_2, X_3\}\right) = 0.9332023767104407$
+$\hat{z}\left(X_1, X_4, \{X_2, X_3\}\right) = 0.9332023767104407$
+
+\subsection{p-values [1 point]}
+\subsection{(d)}
+$\text { compute\_pvalue (pcalg\_samples, } 1,4,[2,3] \text { ) } = 0.35071548783635986$
+
+\subsection{Skeleton phase [2 points]}
+\subsection*{(e)}
+$\text { pcalg\_skeleton(samples}[: 500], 0.2) = 10$
+\subsection*{(f)}
+$\text { pcalg\_skeleton(samples}[: 500], 0.001) = 10$
+
+\subsection{Orientation phase [2 points]}
+\subsection*{(g)}
+$X_1 \rightarrow X_3 \leftarrow X_2$ is the only unshileded collider in the output of $\textit{pcalg\_orient(estimated\_skeleton, estimated\_separator\_function) }$ 
 
 \end{document}

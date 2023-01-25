@@ -1,6 +1,9 @@
 import pandas as pd
 import numpy as np
 
+from more_itertools import powerset
+from itertools import combinations
+
 X = pd.read_csv('pset2/code/problem2/pcalg_samples.csv',delimiter=' ', header=None, index_col=False)
 X.columns = ['X1', 'X2', 'X3', 'X4', 'X5', 'X6', 'X7']
 
@@ -46,8 +49,109 @@ def ztransf(samples, i, j, S):
 z1 = ztransf(X, 1, 7, [3, 4])
 z2 = ztransf(X, 1, 7, [])
 
-zc = ztransf(X, 1, 4, [2, 3])
+xzc = ztransf(X, 1, 4, [2, 3])
 
+def pval(samples, i, j, S):
+    from scipy.stats import norm
+    z = ztransf(samples, i, j, S)
+    return 2 * (1 - norm.cdf(np.abs(z)))
+
+pval1 = pval(X, 1, 7, [3, 4])
+pval2 = pval(X, 1, 7, [])
+
+pvald = pval(X, 1, 4, [2, 3])
+
+def pcalg_skeleton(samples, alpha):
+    import networkx as nx
+    # create complete graph
+    G = nx.complete_graph(len(samples.columns))
+    # relabel nodes
+    mapping = {}
+    for i in range(0, len(samples.columns)):
+        mapping[i] = i+1
+    G = nx.relabel_nodes(G, mapping) # relabel nodes not to start from 0 but from 1
+
+    # define sepearaor
+    sep = dict() 
+
+    # initialize d
+    d = 0
+    def exists(G, d):
+        for i, j in G.edges:
+            neighbors = [n for n in G.neighbors(i)]
+            neighbors.remove(j)
+            if len(neighbors) >= d:
+                return True
+        else:
+            return False
+
+    while exists(G, d):
+        for i, j in G.edges:
+            neighbor_i = [n for n in G.neighbors(i)]
+            neighbor_i.remove(j)
+            SS = list(powerset(neighbor_i))
+            for S in SS:
+                if len(S) == d:
+                    pval_ij_S = pval(X, i, j, S)
+                    if pval_ij_S > alpha:
+                        print("remove")
+                        try:
+                            G.remove_edge(i, j)
+                            # print((i,j), S)
+                            sep[(i, j)] = S
+                        except (ValueError, nx.exception.NetworkXError) as e:
+                            pass
+
+            neighbor_j = [n for n in G.neighbors(j)]
+            try:
+                neighbor_j.remove(i)
+            except ValueError:
+                pass
+            SS = list(powerset(neighbor_j))
+            for S in SS:
+                if len(S) == d:
+                    pval_ij_S = pval(X, i, j, S)
+                    if pval_ij_S > alpha:
+                        print("remove")
+                        try:
+                            G.remove_edge(i, j)
+                            # print((i,j), S)
+                            sep[(i, j)] = S
+                        except (ValueError, nx.exception.NetworkXError) as e:
+                            pass
+        d = d + 1            
+
+    print("alpha:", alpha)
+    print("#edge", G.number_of_edges())
+    import matplotlib.pyplot as plt
+    nx.draw(G, with_labels=True)
+    plt.savefig(f"./pset2/code/problem2/skel_{alpha}.png")
+    plt.close()
+    return G, sep
+
+# pcalg_skeleton(X, 0.05)
+# pcalg_skeleton(X[:500], 0.2)
+# pcalg_skeleton(X[:500], 0.001)
+
+G, s = pcalg_skeleton(X, 0.05)
+
+unshielded = []
+for X_k in G.nodes:
+    neighbors = [n for n in G.neighbors(X_k)]
+    if len(neighbors) < 2:
+        continue
+    else:
+        print(X_k)
+        colliders = list(combinations(neighbors, 2))
+        # print(colliders)
+        for i, j in colliders:
+            if not G.has_edge(i, j):
+                print("i, j: ", i, j)
+                print("k: ", X_k)
+                print("s(i, j): ", s[(i, j)])
+                if X_k not in s[(i, j)]:
+                    print("add unshilded")
+                    unshielded.append((i, X_k, j))
 
 if __name__ == '__main__':
     pass
