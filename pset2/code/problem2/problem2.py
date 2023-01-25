@@ -82,10 +82,10 @@ def pcalg_skeleton(samples, alpha):
             neighbors.remove(j)
             if len(neighbors) >= d:
                 return True
-        else:
-            return False
+        return False
 
     while exists(G, d):
+        print(d)
         for i, j in G.edges:
             neighbor_i = [n for n in G.neighbors(i)]
             neighbor_i.remove(j)
@@ -131,27 +131,27 @@ def pcalg_skeleton(samples, alpha):
 
 # pcalg_skeleton(X, 0.05)
 # pcalg_skeleton(X[:500], 0.2)
-# pcalg_skeleton(X[:500], 0.001)
+pcalg_skeleton(X[:500], 0.001)
 
-G, s = pcalg_skeleton(X, 0.05)
+# G, s = pcalg_skeleton(X, 0.05)
 
-unshielded = []
-for X_k in G.nodes:
-    neighbors = [n for n in G.neighbors(X_k)]
-    if len(neighbors) < 2:
-        continue
-    else:
-        print(X_k)
-        colliders = list(combinations(neighbors, 2))
-        # print(colliders)
-        for i, j in colliders:
-            if not G.has_edge(i, j):
-                print("i, j: ", i, j)
-                print("k: ", X_k)
-                print("s(i, j): ", s[(i, j)])
-                if X_k not in s[(i, j)]:
-                    print("add unshilded")
-                    unshielded.append((i, X_k, j))
+# unshielded = []
+# for X_k in G.nodes:
+#     neighbors = [n for n in G.neighbors(X_k)]
+#     if len(neighbors) < 2:
+#         continue
+#     else:
+#         print(X_k)
+#         colliders = list(combinations(neighbors, 2))
+#         # print(colliders)
+#         for i, j in colliders:
+#             if not G.has_edge(i, j):
+#                 print("i, j: ", i, j)
+#                 print("k: ", X_k)
+#                 print("s(i, j): ", s[(i, j)])
+#                 if X_k not in s[(i, j)]:
+#                     print("add unshilded")
+#                     unshielded.append((i, X_k, j))
 
 if __name__ == '__main__':
     pass
