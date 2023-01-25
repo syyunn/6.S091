@@ -124,11 +124,11 @@ def pcalg_skeleton(samples, alpha):
     plt.close()
     return G, sep
 
-# pcalg_skeleton(X, 0.05)
-# pcalg_skeleton(X[:500], 0.2)
-# pcalg_skeleton(X[:500], 0.001)
+pcalg_skeleton(X, 0.05)
+pcalg_skeleton(X[:500], 0.2)
+pcalg_skeleton(X[:500], 0.001)
 
-G, s = pcalg_skeleton(X, 0.05)
+# G, s = pcalg_skeleton(X, 0.05)
 
 unshielded = []
 for k in G.nodes:
