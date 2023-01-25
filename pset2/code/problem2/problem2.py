@@ -61,6 +61,9 @@ pval2 = pval(X, 1, 7, [])
 
 pvald = pval(X, 1, 4, [2, 3])
 
+# debug for (e)
+print("debug:", pval(X[:500], 1, 2, []))
+
 def pcalg_skeleton(samples, alpha):
     import networkx as nx
     # create complete graph
@@ -92,33 +95,29 @@ def pcalg_skeleton(samples, alpha):
             SS = list(powerset(neighbor_i))
             for S in SS:
                 if len(S) == d:
-                    pval_ij_S = pval(X, i, j, S)
+                    pval_ij_S = pval(samples, i, j, S)
                     if pval_ij_S > alpha:
-                        print("remove")
-                        try:
+                        if G.has_edge(i, j):
+                            print("remove")
                             G.remove_edge(i, j)
-                            # print((i,j), S)
                             sep[(i, j)] = S
-                        except (ValueError, nx.exception.NetworkXError) as e:
-                            pass
+                            print(pval_ij_S, i, j, neighbor_i, S)
 
             neighbor_j = [n for n in G.neighbors(j)]
-            try:
+            if i in neighbor_j:
                 neighbor_j.remove(i)
-            except ValueError:
-                pass
+
             SS = list(powerset(neighbor_j))
             for S in SS:
                 if len(S) == d:
-                    pval_ij_S = pval(X, i, j, S)
+                    pval_ij_S = pval(samples, i, j, S)
                     if pval_ij_S > alpha:
-                        print("remove")
-                        try:
+                        if G.has_edge(i, j):
+                            print("remove")
                             G.remove_edge(i, j)
-                            # print((i,j), S)
                             sep[(i, j)] = S
-                        except (ValueError, nx.exception.NetworkXError) as e:
-                            pass
+                            print(pval_ij_S, i, j, neighbor_i, S)
+
         d = d + 1            
 
     print("alpha:", alpha)
