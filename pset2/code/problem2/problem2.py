@@ -61,24 +61,23 @@ pval2 = pval(X, 1, 7, [])
 
 pvald = pval(X, 1, 4, [2, 3])
 
-# debug for (e)
-print("debug:", pval(X[:500], 1, 2, []))
-
 def pcalg_skeleton(samples, alpha):
     import networkx as nx
     # create complete graph
     G = nx.complete_graph(len(samples.columns))
-    # relabel nodes
+    
+    # relabel nodes not to start from 0 but from 1    
     mapping = {}
     for i in range(0, len(samples.columns)):
         mapping[i] = i+1
-    G = nx.relabel_nodes(G, mapping) # relabel nodes not to start from 0 but from 1
+    G = nx.relabel_nodes(G, mapping)
 
-    # define sepearaor
+    # define sepeartaor
     sep = dict() 
 
     # initialize d
     d = 0
+
     def exists(G, d):
         for i, j in G.edges:
             neighbors = [n for n in G.neighbors(i)]
@@ -88,7 +87,7 @@ def pcalg_skeleton(samples, alpha):
         return False
 
     while exists(G, d):
-        print(d)
+        print("d:", d)
         for i, j in G.edges:
             neighbor_i = [n for n in G.neighbors(i)]
             neighbor_i.remove(j)
@@ -101,7 +100,6 @@ def pcalg_skeleton(samples, alpha):
                             print("remove")
                             G.remove_edge(i, j)
                             sep[(i, j)] = S
-                            print(pval_ij_S, i, j, neighbor_i, S)
 
             neighbor_j = [n for n in G.neighbors(j)]
             if i in neighbor_j:
@@ -110,14 +108,12 @@ def pcalg_skeleton(samples, alpha):
             SS = list(powerset(neighbor_j))
             for S in SS:
                 if len(S) == d:
-                    pval_ij_S = pval(samples, i, j, S)
-                    if pval_ij_S > alpha:
+                    pval_ji_S = pval(samples, j, i, S)
+                    if pval_ji_S > alpha:
                         if G.has_edge(i, j):
                             print("remove")
                             G.remove_edge(i, j)
                             sep[(i, j)] = S
-                            print(pval_ij_S, i, j, neighbor_i, S)
-
         d = d + 1            
 
     print("alpha:", alpha)
@@ -130,28 +126,25 @@ def pcalg_skeleton(samples, alpha):
 
 # pcalg_skeleton(X, 0.05)
 # pcalg_skeleton(X[:500], 0.2)
-pcalg_skeleton(X[:500], 0.001)
+# pcalg_skeleton(X[:500], 0.001)
 
-# G, s = pcalg_skeleton(X, 0.05)
+G, s = pcalg_skeleton(X, 0.05)
 
-# unshielded = []
-# for X_k in G.nodes:
-#     neighbors = [n for n in G.neighbors(X_k)]
-#     if len(neighbors) < 2:
-#         continue
-#     else:
-#         print(X_k)
-#         colliders = list(combinations(neighbors, 2))
-#         # print(colliders)
-#         for i, j in colliders:
-#             if not G.has_edge(i, j):
-#                 print("i, j: ", i, j)
-#                 print("k: ", X_k)
-#                 print("s(i, j): ", s[(i, j)])
-#                 if X_k not in s[(i, j)]:
-#                     print("add unshilded")
-#                     unshielded.append((i, X_k, j))
-
+unshielded = []
+for k in G.nodes:
+    neighbors = [n for n in G.neighbors(k)]
+    if len(neighbors) < 2:
+        continue
+    else:
+        print(k)
+        colliders = list(combinations(neighbors, 2))
+        # print(colliders)
+        for i, j in colliders:
+            if not G.has_edge(i, j):
+                if k not in s[(i, j)]:
+                    print("add unshilded")
+                    unshielded.append((i, k, j))
+print(unshielded)
 if __name__ == '__main__':
     pass
 
