@@ -37,6 +37,8 @@
 \maketitle
  
 \section{Problem 1}
+* Code is available here \url{https://github.com/syyunn/6.S091/blob/main/pset2/code/problem1/problem1.py}
+
 \subsection{Plotting Regression Residuals [1 point]}
 \subsection{(a)} $\hat{\beta}_{12} = 2.0032613606359835$
 \subsection{(b)} $\hat{\beta}_{21} = 0.4853818665988653$
@@ -49,6 +51,9 @@
 The plot explains the relationship between $\varepsilon_1$ and $\varepsilon_2$. Since $\varepsilon_1 \Perp \varepsilon_2$, we have to choose the SCM which shows such independence. Therefore, the data is more likely to be generated from SCM $M^a$.
 
 \section{Problem 2}
+
+* Code is available here \url{https://github.com/syyunn/6.S091/blob/main/pset2/code/problem2/problem2.py}
+
 \subsection{Partial correlation [2 points]}
 \subsection{(a)}
 $\hat{\rho}\left(X_1, X_4, \varnothing\right) = 0.18515108160562416$
@@ -78,5 +83,10 @@ $\text { pcalg\_skeleton(samples}[: 500], 0.001) = 9$
 \subsection{Orientation phase [2 points]}
 \subsection*{(g)}
 $X_1 \rightarrow X_3 \leftarrow X_2$ is the only unshileded collider in the output of $\textit{pcalg\_orient(estimated\_skeleton, estimated\_separator\_function) }$. 
+
+\subsection*{(h)}
+
+The orientations $X_3 \rightarrow X_4, X_3 \rightarrow X_5, X_3 \rightarrow X_6, X_3 \rightarrow X_7$ are added by the Meek's rule \#1 (no extra unshileded colliders).
+However, after the application of Rule 1, no other edges are oriented by the Rule 2, 3, and 4. See the details in the code.
 
 \end{document}
