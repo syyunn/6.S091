@@ -43,14 +43,14 @@ nx.draw(G_a, with_labels=True)
 plt.savefig('pset3/tex/images/pb1a.png')
 plt.close()
 
-perm_b = [4, 3, 0, 1, 2]
+perm_b = [4, 3, 2, 1, 0]
 G_b = minimal_map(samples, perm_b, 0.05)
 G_b = relabel_nodes(G_b, perm_b) # add 1 to nodes
 nx.draw(G_b, with_labels=True)
 plt.savefig('pset3/tex/images/pb1b.png')
 plt.close()
 
-perm_c = [4, 3, 2, 1, 0]
+perm_c = [4, 3, 0, 1, 2]
 G_c = minimal_map(samples, perm_c, 0.05)
 G_c = relabel_nodes(G_c, perm_c) # add 1 to nodes
 nx.draw(G_c, with_labels=True)
